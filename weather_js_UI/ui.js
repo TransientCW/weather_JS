@@ -12,6 +12,9 @@ const iconMap = {
   wind: `<img src="svg/cloudy.svg" width="60" height="60" />`
 };
 
+// Change this to the port the node app is running on
+const PORT = 8080;
+
 const card = document.querySelector("#w-card");
 const citySelect = document.querySelector("#w-city");
 const description = document.querySelector("#w-desc");
@@ -51,7 +54,7 @@ weatherSubmit.addEventListener("click", async e => {
   }
 
   if (city && city !== "") {
-    fetch(`http://localhost:8080/?city=${city}`)
+    fetch(`http://localhost:${PORT}/?city=${city}`)
       .then(result => {
         return result.json();
       })
