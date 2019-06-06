@@ -11,7 +11,7 @@ The .env file should have the following (case sensitive):
 
 <pre>GOOGLE_KEY=[your google key]</pre><br>
 <pre>DARKSKY_KEY=[your darkSky key]</pre><br>
-<pre>WEATHER_JS_PORT=<any port></pre><br>
+<pre>WEATHER_JS_PORT=[arbitrary port]</pre><br>
 
 Note that whatever port you choose to run the node application on, you will need to change the PORT variable in weather_js_UI/ui.js to match it.
 
