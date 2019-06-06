@@ -17,10 +17,11 @@ class Hourly extends AbstractWeatherConditions {
   buildHourlyObjects = hourlyArray => {
     const hoursMap = this.hoursMap;
     const summaryColors = this.summaryColors;
+
     const weatherBar = document.createElement("div");
     weatherBar.className = `progress
         mt-3
-        mb-3
+        mb-1
         d-flex
         flex-row
         justify-content-center
@@ -30,6 +31,11 @@ class Hourly extends AbstractWeatherConditions {
     weatherBar.style.width = "98%";
     weatherBar.style.backgroundColor = "transparent";
     weatherBar.style.boxShadow = "0px 1px 10px rgba(0, 0, 0, 0.5)";
+
+    const hourlyBar = document.createElement("div");
+    hourlyBar.className =
+      "d-flex flex-row justify-content-center align-items-start w-100";
+    hourlyBar.style.height = "70px";
 
     let hourlyDate = new Date().getHours();
     let startHoursModule = hourlyDate % 2 === 0 ? "even" : "odd";
@@ -52,7 +58,7 @@ class Hourly extends AbstractWeatherConditions {
           hourly.hoursTime = hoursMap[hourlyDate];
         }
       }
-
+      // Add colored box to the weather colored div
       const barPiece = document.createElement("div");
       barPiece.className =
         "progress-bar d-flex flex-column justify-content-center align-items-center";
@@ -64,21 +70,43 @@ class Hourly extends AbstractWeatherConditions {
         hourlyIcon = hourly.icon;
       }
       barPiece.style.background = summaryColors[hourlyIcon];
+
+      // Add hourly graph and text/data to the hourly bar
+      const hourlyGridBox = document.createElement("div");
+      hourlyGridBox.className =
+        "d-flex flex-column justify-content-center align-items-center";
+      hourlyGridBox.style.width = `${width}%`;
+      const temperature =
+        hourly.hoursTime === "" ? "" : hourly.temperature + "\u00B0";
+      const pipe = hourly.hoursTime === "" ? "ı" : "|";
+      hourlyGridBox.innerHTML = `
+        <p>${pipe}</p>
+        <div style="position: relative; left: 15px;">
+          <p class="smText font-weight-light">${hourly.hoursTime}</p>
+        </div>
+        <div style="position: relative; left: 15px;">
+          <p class="font-weight-bold">${temperature}</p>
+        </div>
+      `;
+
       weatherBar.appendChild(barPiece);
+      hourlyBar.appendChild(hourlyGridBox);
       hourlyDate++;
     });
     this.hourlyBody.appendChild(weatherBar);
+    this.hourlyBody.appendChild(hourlyBar);
     this.buildHourlyTextObjects(hourlyArray);
   };
 
   buildHourlyTextObjects = hourlyArray => {
-    console.log("hourly array: ", hourlyArray);
+    const hourlyBar = document.createElement("div");
   };
 
   setForecastList = () => {
     // Create outer wrapper div
     const outer = document.createElement("div");
     outer.className = "card border-secondary mb-3 mx-auto w-100";
+    outer.style.height = "290px";
     // Create summary header div
     const header = document.createElement("div");
     header.className =
@@ -105,7 +133,7 @@ class Hourly extends AbstractWeatherConditions {
     // Create body for all dynamic hourly content and set reference in field
     const hourlyBody = document.createElement("div");
     hourlyBody.className =
-      "card-body p-0 d-flex flex-row justify-content-center align-items-center";
+      "card-body p-0 d-flex flex-column justify-content-start align-items-center";
     hourlyBody.setAttribute("id", "hourly-body");
     this.hourlyBody = hourlyBody;
     // Append the hr and the hourly body to the outer wrapper

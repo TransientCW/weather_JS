@@ -15,4 +15,4 @@ The .env file should have the following (case sensitive):
 
 Note that whatever port you choose to run the node application on, you will need to change the PORT variable in weather_js_UI/ui.js to match it.
 
-The front-end uses the google geocod api to convert a worlwide address/location search to lat/long values, which are then used to get current, hourly, and daily weather data to display.
+The front-end uses the google geocode api to convert a worlwide address/location search to lat/long values, which are then used to get current, hourly, and daily weather data to display.

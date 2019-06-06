@@ -22,6 +22,11 @@ body {
   text-shadow: 1px 1px 3px white;
 }
 
+.smText {
+  font-size: 0.8em;
+  font-weight: 900;
+}
+
 .hidden {
   visibility: hidden;
 }
