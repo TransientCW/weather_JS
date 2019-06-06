@@ -17,6 +17,11 @@ body {
   text-shadow: 1px 1px 8px white;
 }
 
+.xs {
+  font-size: 0.5em;
+  text-shadow: 1px 1px 3px white;
+}
+
 .hidden {
   visibility: hidden;
 }

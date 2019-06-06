@@ -11,12 +11,68 @@ class Hourly extends AbstractWeatherConditions {
 
   initialize = () => {
     this.foreCastCard = this.setForecastList();
-    this.twentyFourHours = this.buildHourlyObjects(this.data.slice(0, 25));
+    this.twentyFourHours = this.buildHourlyObjects(this.data.slice(0, 24));
   };
 
   buildHourlyObjects = hourlyArray => {
-    // This function will build the entire hourly summary graph bar,
-    // and each individual hourly summary beneath it
+    const hoursMap = this.hoursMap;
+    const summaryColors = this.summaryColors;
+    const weatherBar = document.createElement("div");
+    weatherBar.className = `progress
+        mt-3
+        mb-3
+        d-flex
+        flex-row
+        justify-content-center
+        align-items-center
+      `;
+    weatherBar.style.height = "35px";
+    weatherBar.style.width = "98%";
+    weatherBar.style.backgroundColor = "transparent";
+    weatherBar.style.boxShadow = "0px 1px 10px rgba(0, 0, 0, 0.5)";
+
+    let hourlyDate = new Date().getHours();
+    let startHoursModule = hourlyDate % 2 === 0 ? "even" : "odd";
+
+    // Loop through each hourly object and add to the hourlyBody div
+    hourlyArray.forEach(hourly => {
+      if (hourlyDate >= 24) {
+        hourlyDate = 0;
+      }
+      if (startHoursModule === "even") {
+        if (hourlyDate % 2 === 0) {
+          hourly.hoursTime = hoursMap[hourlyDate];
+        } else {
+          hourly.hoursTime = "";
+        }
+      } else {
+        if (hourlyDate % 2 === 0) {
+          hourly.hoursTime = "";
+        } else {
+          hourly.hoursTime = hoursMap[hourlyDate];
+        }
+      }
+
+      const barPiece = document.createElement("div");
+      barPiece.className =
+        "progress-bar d-flex flex-column justify-content-center align-items-center";
+      const width = 100 / 24;
+      barPiece.style.width = `${width}%`;
+      barPiece.style.height = "35px";
+      let hourlyIcon = "default";
+      if (hourly.icon) {
+        hourlyIcon = hourly.icon;
+      }
+      barPiece.style.background = summaryColors[hourlyIcon];
+      weatherBar.appendChild(barPiece);
+      hourlyDate++;
+    });
+    this.hourlyBody.appendChild(weatherBar);
+    this.buildHourlyTextObjects(hourlyArray);
+  };
+
+  buildHourlyTextObjects = hourlyArray => {
+    console.log("hourly array: ", hourlyArray);
   };
 
   setForecastList = () => {
@@ -48,7 +104,8 @@ class Hourly extends AbstractWeatherConditions {
     );
     // Create body for all dynamic hourly content and set reference in field
     const hourlyBody = document.createElement("div");
-    hourlyBody.className = "card-body";
+    hourlyBody.className =
+      "card-body p-0 d-flex flex-row justify-content-center align-items-center";
     hourlyBody.setAttribute("id", "hourly-body");
     this.hourlyBody = hourlyBody;
     // Append the hr and the hourly body to the outer wrapper
