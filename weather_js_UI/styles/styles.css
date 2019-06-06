@@ -1,0 +1,26 @@
+body {
+  background-image: url("../image/weather.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  object-fit: contain;
+}
+
+.iconImg {
+  color: orange;
+  font-size: 2em;
+  text-shadow: 1px 1px 8px black;
+}
+
+.sm {
+  font-size: 1.8em;
+  text-shadow: 1px 1px 8px white;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.visible {
+  visibility: visible;
+}
