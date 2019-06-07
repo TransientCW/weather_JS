@@ -41,7 +41,7 @@ class Hourly extends AbstractWeatherConditions {
     let startHoursModule = hourlyDate % 2 === 0 ? "even" : "odd";
 
     // Loop through each hourly object and add to the hourlyBody div
-    hourlyArray.forEach(hourly => {
+    hourlyArray.forEach((hourly, index) => {
       if (hourlyDate >= 24) {
         hourlyDate = 0;
       }
@@ -79,14 +79,24 @@ class Hourly extends AbstractWeatherConditions {
       const temperature =
         hourly.hoursTime === "" ? "" : hourly.temperature + "\u00B0";
       const pipe = hourly.hoursTime === "" ? "ı" : "|";
+      let speed = "";
+      if (index % 2 === 0) {
+        speed = `
+        <div class="d-flex flex-column justify-content-center align-items-center moveRight">
+          ${this.getWindBearingIcon(hourly.windBearing)}
+          <p class="smText">${hourly.windSpeed}</p>
+        </div>
+        `;
+      }
       hourlyGridBox.innerHTML = `
         <p>${pipe}</p>
-        <div style="position: relative; left: 15px;">
-          <p class="smText font-weight-light">${hourly.hoursTime}</p>
+        <div class="d-flex justify-content-center align-items-center moveRight">
+          <p class="smText">${hourly.hoursTime}</p>
         </div>
-        <div style="position: relative; left: 15px;">
-          <p class="font-weight-bold">${temperature}</p>
+        <div class="d-flex justify-content-center align-items-center moveRight">
+          <p class="smText font-weight-light">${temperature}</p>
         </div>
+        ${speed}
       `;
 
       weatherBar.appendChild(barPiece);
@@ -106,7 +116,7 @@ class Hourly extends AbstractWeatherConditions {
     // Create outer wrapper div
     const outer = document.createElement("div");
     outer.className = "card border-secondary mb-3 mx-auto w-100";
-    outer.style.height = "290px";
+    outer.style.height = "300px";
     // Create summary header div
     const header = document.createElement("div");
     header.className =

@@ -23,7 +23,7 @@ body {
 }
 
 .smText {
-  font-size: 0.8em;
+  font-size: 0.6em;
   font-weight: 900;
 }
 
@@ -33,4 +33,31 @@ body {
 
 .visible {
   visibility: visible;
+}
+
+.moveRight {
+  position: relative;
+  left: 15px;
+}
+
+@media screen and (max-width: 900px) {
+  .smText {
+    font-size: 0.4em;
+    font-weight: 400;
+  }
+
+  .moveRight {
+    left: 5px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .smText {
+    font-size: 0.25em;
+    font-weight: 300;
+  }
+
+  .moveRight {
+    left: 3px;
+  }
 }
