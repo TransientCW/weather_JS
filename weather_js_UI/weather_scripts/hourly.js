@@ -116,14 +116,14 @@ class Hourly extends AbstractWeatherConditions {
     // Create outer wrapper div
     const outer = document.createElement("div");
     outer.className = "card border-secondary mb-3 mx-auto w-100";
-    outer.style.height = "300px";
+    outer.style.height = "350px";
     // Create summary header div
     const header = document.createElement("div");
     header.className =
       "card-header d-flex flex-row justify-content-between align-items-center";
     // Append summary status to summary header div
     const headerStatus = document.createElement("h4");
-    headerStatus.className = "text-success mb-0";
+    headerStatus.className = "text-success mb-0 mdText";
     headerStatus.appendChild(document.createTextNode(`${this.summary}`));
     // Create weather icon
     const iconSpan = document.createElement("span");

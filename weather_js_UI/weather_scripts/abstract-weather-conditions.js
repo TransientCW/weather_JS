@@ -6,6 +6,7 @@ class AbstractWeatherConditions {
   constructor(data) {
     this.bearingsMap = getBearingsMap();
     this.data = data;
+    this.daysOfWeek = getDaysOfWeek();
     this.hoursMap = getHoursMap();
     this.iconMap = getIconMap();
     this.summaryColors = getSummaryColors();
