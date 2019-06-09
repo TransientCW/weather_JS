@@ -21,7 +21,7 @@ class SevenDay extends AbstractWeatherConditions {
     }
   };
 
-  getDailyDetails() {
+  getDailyDetails = () => {
     let inner = ``;
     let day = parseInt(new Date().getDay());
     this.data.forEach(daily => {
@@ -35,22 +35,6 @@ class SevenDay extends AbstractWeatherConditions {
       tempMin += "\u00B0";
       let windSpeed = daily.windSpeed || "";
       windSpeed += " MPH";
-      // inner += `
-      //   <div class="d-flex flex-column justify-content-center align-items-center w-25">
-      //     <div>${this.iconMap[daily.icon]}</div>
-      //     <p class="text-dark mdText">${today}</p>
-      //     <div class="d-flex flex-row flex-wrap justify-content-between align-items-center>
-      //       <div class="d-flex flex-column justify-content-center align-items-center>
-      //         <i class="wi wi-direction-down"></i>
-      //         <p class="text-dark mdText">${tempMin}</p>
-      //       </div>
-      //       <div class="d-flex flex-column justify-content-center align-items-center>
-      //         <i class="wi wi-direction-up"></i>
-      //         <p class="text-dark mdText">${tempMax}</p>
-      //       </div>
-      //     </div>
-      //   </div>
-      // `;
       inner += `
       <div class="d-flex flex-column justify-content-center align-items-center w-25 m-1">
         ${this.iconMap[daily.icon]}
@@ -67,14 +51,24 @@ class SevenDay extends AbstractWeatherConditions {
       day++;
     });
     return inner;
-  }
+  };
+
+  getMoonPhaseDetails = () => {
+    let inner = ``;
+    this.data.forEach(daily => {
+      console.log("daily phase to string: ", daily.moonPhase.toString());
+      let phase = this.getMoonPhaseIcon(daily.moonPhase.toString());
+      inner += `<div>${phase}</div>`;
+    });
+    return inner;
+  };
 
   renderList = type => {
     let inner;
     if (type === "daily") {
       inner = this.getDailyDetails();
     } else {
-      inner = ``;
+      inner = this.getMoonPhaseDetails();
     }
     const wrapper = document.createElement("div");
     wrapper.className = "card border-secondary mb-3 mx-auto w-100";

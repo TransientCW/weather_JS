@@ -9,6 +9,7 @@ class AbstractWeatherConditions {
     this.daysOfWeek = getDaysOfWeek();
     this.hoursMap = getHoursMap();
     this.iconMap = getIconMap();
+    this.moonPhasesMap = getMoonPhaseMap();
     this.summaryColors = getSummaryColors();
   }
 
@@ -72,6 +73,69 @@ class AbstractWeatherConditions {
       let nums = [];
       for (let i = start; i < finish; i++) {
         nums.push(i);
+      }
+      return nums;
+    }
+  };
+
+  /**
+   * Function to return the icon associated with the moon phase.
+   * It rounds the phase number down to the next lowest phase
+   * and returns the icon
+   *
+   * @param {Number} the bearing/degrees
+   */
+  getMoonPhaseIcon = phase => {
+    const comparators = {
+      "0": loadComparators(0, 0.03),
+      "0.03": loadComparators(0.03, 0.07),
+      "0.07": loadComparators(0.07, 0.1),
+      "0.1": loadComparators(0.1, 0.14),
+      "0.14": loadComparators(0.14, 0.18),
+      "0.18": loadComparators(0.18, 0.21),
+      "0.21": loadComparators(0.21, 0.25),
+      "0.25": loadComparators(0.25, 0.28),
+      "0.28": loadComparators(0.28, 0.32),
+      "0.32": loadComparators(0.32, 0.36),
+      "0.36": loadComparators(0.36, 0.39),
+      "0.39": loadComparators(0.39, 0.43),
+      "0.43": loadComparators(0.43, 0.46),
+      "0.46": loadComparators(0.46, 0.5),
+      "0.5": loadComparators(0.5, 0.54),
+      "0.54": loadComparators(0.54, 0.57),
+      "0.57": loadComparators(0.57, 0.61),
+      "0.61": loadComparators(0.61, 0.64),
+      "0.64": loadComparators(0.64, 0.68),
+      "0.68": loadComparators(0.68, 0.72),
+      "0.72": loadComparators(0.72, 0.75),
+      "0.75": loadComparators(0.75, 0.79),
+      "0.79": loadComparators(0.79, 0.82),
+      "0.82": loadComparators(0.82, 0.86),
+      "0.86": loadComparators(0.86, 0.89),
+      "0.89": loadComparators(0.89, 0.93),
+      "0.93": loadComparators(0.93, 0.97),
+      "0.97": loadComparators(0.97, 1)
+    };
+
+    console.log(comparators);
+
+    let finalPhase;
+    Object.keys(comparators).forEach(key => {
+      if (comparators[key].indexOf(phase) !== -1) {
+        finalPhase = key;
+      }
+    });
+
+    if (finalPhase) {
+      return this.moonPhasesMap[finalPhase];
+    } else {
+      return this.moonPhasesMap[0];
+    }
+
+    function loadComparators(start, finish) {
+      let nums = [];
+      for (let i = start; i < finish; i += 0.01) {
+        nums.push(i.toFixed(2));
       }
       return nums;
     }

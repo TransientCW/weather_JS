@@ -76,6 +76,39 @@ function getHoursMap() {
   };
 }
 
+function getMoonPhaseMap() {
+  return {
+    0: `<i class="wi wi-moon-alt-new"></i>`,
+    0.3: `<i class="wi wi-moon-alt-waxing-crescent-1"></i>`,
+    0.7: `<i class="wi wi-moon-alt-waxing-crescent-2"></i>`,
+    0.1: `<i class="wi wi-moon-alt-waxing-crescent-3"></i>`,
+    0.14: `<i class="wi wi-moon-alt-waxing-crescent-4"></i>`,
+    0.18: `<i class="wi wi-moon-alt-waxing-crescent-5"></i>`,
+    0.21: `<i class="wi wi-moon-alt-waxing-crescent-6"></i>`,
+    0.25: `<i class="wi wi-moon-alt-first-quarter"></i>`,
+    0.28: `<i class="wi wi-moon-alt-waxing-gibbous-1"></i>`,
+    0.32: `<i class="wi wi-moon-alt-waxing-gibbous-2"></i>`,
+    0.36: `<i class="wi wi-moon-alt-waxing-gibbous-3"></i>`,
+    0.39: `<i class="wi wi-moon-alt-waxing-gibbous-4"></i>`,
+    0.43: `<i class="wi wi-moon-alt-waxing-gibbous-5"></i>`,
+    0.46: `<i class="wi wi-moon-alt-waxing-gibbous-6"></i>`,
+    0.5: `<i class="wi wi-moon-alt-full"></i>`,
+    0.54: `<i class="wi wi-moon-alt-waning-gibbous-1"></i>`,
+    0.57: `<i class="wi wi-moon-alt-waning-gibbous-2"></i>`,
+    0.61: `<i class="wi wi-moon-alt-waning-gibbous-3"></i>`,
+    0.64: `<i class="wi wi-moon-alt-waning-gibbous-4"></i>`,
+    0.68: `<i class="wi wi-moon-alt-waning-gibbous-5"></i>`,
+    0.72: `<i class="wi wi-moon-alt-waning-gibbous-6"></i>`,
+    0.75: `<i class="wi wi-moon-alt-third-quarter"></i>`,
+    0.79: `<i class="wi wi-moon-alt-waning-crescent-1"></i>`,
+    0.82: `<i class="wi wi-moon-alt-waning-crescent-2"></i>`,
+    0.86: `<i class="wi wi-moon-alt-waning-crescent-3"></i>`,
+    0.89: `<i class="wi wi-moon-alt-waning-crescent-4"></i>`,
+    0.93: `<i class="wi wi-moon-alt-waning-crescent-5"></i>`,
+    0.97: `<i class="wi wi-moon-alt-waning-crescent-6"></i>`
+  };
+}
+
 function getSummaryColors() {
   return {
     "clear-day": "#ccffff",
