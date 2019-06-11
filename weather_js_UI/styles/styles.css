@@ -40,6 +40,12 @@ body {
   left: 15px;
 }
 
+.phase {
+  color: orange;
+  font-size: 2em;
+  text-shadow: 1px 1px 8px black;
+}
+
 @media screen and (max-width: 900px) {
   .smText {
     font-size: 0.3em;

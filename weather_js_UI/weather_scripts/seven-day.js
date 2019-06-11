@@ -54,12 +54,21 @@ class SevenDay extends AbstractWeatherConditions {
   };
 
   getMoonPhaseDetails = () => {
-    let inner = ``;
+    let day = parseInt(new Date().getDay());
+    let inner = `<div class="d-flex flex-row flex-wrap justify-content-center align-items-center">`;
     this.data.forEach(daily => {
-      console.log("daily phase to string: ", daily.moonPhase.toString());
+      if (day === 8) {
+        day = 1;
+      }
+      let today = this.daysOfWeek[day];
       let phase = this.getMoonPhaseIcon(daily.moonPhase.toString());
-      inner += `<div>${phase}</div>`;
+      inner += `<div class="d-flex flex-column justify-content-center align-items-center m-2">
+        <div class="phase">${phase}</div>
+        <div class="text-bold">${today}</div>
+      </div>`;
+      day++;
     });
+    inner += `</div>`;
     return inner;
   };
 
