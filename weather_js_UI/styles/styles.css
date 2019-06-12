@@ -66,9 +66,8 @@ body {
 
 @media screen and (max-width: 450px) {
   .smText {
-    font-size: 0.15em;
-    font-weight: 300;
-    color: red;
+    font-size: 0.25em;
+    font-weight: 400;
   }
 
   .moveRight {
